@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard de gestión de asignación de prácticas y pasantías profesionales de la Universidad Politécnica Territorial del Zulia (UPTZ).">
+  <title>UPTZ · Gestión de Prácticas y Pasantías</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01M12 6h.01M12 10h.01M12 14h.01"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></symbol>
+    <symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3Z"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-logo"><svg class="icon"><use href="#i-cap"></use></svg></div>
+        <div class="brand-text">
+          <strong>UPTZ</strong>
+          <span>Prácticas y Pasantías</span>
+        </div>
+      </div>
+      <p class="brand-institution">Universidad Politécnica<br>Territorial del Zulia</p>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <p class="nav-label">Gestión académica</p>
+        <button class="nav-item active" data-page="resumen"><svg class="icon"><use href="#i-dashboard"></use></svg><span>Resumen</span></button>
+        <button class="nav-item" data-page="estudiantes"><svg class="icon"><use href="#i-users"></use></svg><span>Estudiantes</span><em class="nav-count" id="navStudents">0</em></button>
+        <button class="nav-item" data-page="asignaciones"><svg class="icon"><use href="#i-briefcase"></use></svg><span>Asignaciones</span><em class="nav-count" id="navAssignments">0</em></button>
+        <button class="nav-item" data-page="empresas"><svg class="icon"><use href="#i-building"></use></svg><span>Empresas y plazas</span></button>
+        <p class="nav-label">Control</p>
+        <button class="nav-item" data-page="validacion"><svg class="icon"><use href="#i-shield"></use></svg><span>Validación</span><em class="nav-count nav-count-alert" id="navAlerts">0</em></button>
+        <button class="nav-item" data-page="reportes"><svg class="icon"><use href="#i-chart"></use></svg><span>Reportes</span></button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="period-card">
+          <span class="period-dot"></span>
+          <div>
+            <strong>Periodo 2026-II</strong>
+            <span>Modalidad presencial</span>
+          </div>
+        </div>
+        <div class="user-card">
+          <div class="avatar avatar-sm" style="background:linear-gradient(135deg,#f6c453,#e79a12);color:#3d2a00">CP</div>
+          <div class="user-meta">
+            <strong>Coordinación</strong>
+            <span>Pasantías UPTZ</span>
+          </div>
+          <button class="icon-btn icon-btn-dark" data-action="reset-demo" title="Restablecer datos de demostración"><svg class="icon"><use href="#i-refresh"></use></svg></button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menú"><svg class="icon"><use href="#i-menu"></use></svg></button>
+        <div class="page-heading">
+          <span class="eyebrow" id="periodLabel">Periodo académico 2026-II · UPTZ</span>
+          <h1 id="pageTitle">Resumen general</h1>
+        </div>
+        <div class="topbar-actions">
+          <label class="search-box" for="globalSearch">
+            <svg class="icon"><use href="#i-search"></use></svg>
+            <input id="globalSearch" type="search" placeholder="Buscar estudiante o cédula…" autocomplete="off">
+            <kbd>↵</kbd>
+          </label>
+          <button class="icon-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema"><svg class="icon"><use href="#i-moon" id="themeIcon"></use></svg></button>
+          <button class="icon-btn notif" data-page="validacion" title="Alertas de elegibilidad" aria-label="Ver alertas">
+            <svg class="icon"><use href="#i-bell"></use></svg>
+            <span class="notif-badge" id="notifBadge">0</span>
+          </button>
+          <button class="btn btn-primary" data-action="new-student"><svg class="icon"><use href="#i-plus"></use></svg><span>Nuevo estudiante</span></button>
+        </div>
+      </header>
+
+      <main class="content" id="content">
+
+        <!-- ================= RESUMEN ================= -->
+        <section class="page active" id="page-resumen">
+          <h2 class="sr-only">Panel de control de prácticas y pasantías</h2>
+          <div class="criteria-strip" id="criteriaStrip"></div>
+
+          <div class="kpi-grid" id="kpiGrid"></div>
+
+          <div class="grid grid-main">
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Estado de elegibilidad</h3>
+                  <p>Distribución del padrón estudiantil</p>
+                </div>
+                <span class="badge badge-gray" id="donutPeriod">2026-II</span>
+              </div>
+              <div id="donutChart"></div>
+            </article>
+
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Elegibilidad por carrera</h3>
+                  <p>Estudiantes que cumplen todos los requisitos</p>
+                </div>
+                <span class="pill" id="careerTotal"></span>
+              </div>
+              <div id="careerChart" class="bar-list"></div>
+            </article>
+          </div>
+
+          <div class="grid grid-2-1">
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Tendencia de asignaciones</h3>
+                  <p>Histórico institucional de los últimos meses</p>
+                </div>
+                <span class="badge badge-green"><svg class="icon"><use href="#i-trend"></use></svg> Acumulado</span>
+              </div>
+              <div id="trendChart" class="trend-chart"></div>
+            </article>
+
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Requieren atención</h3>
+                  <p>A un requisito de ser elegibles</p>
+                </div>
+                <span class="pill pill-alert" id="alertCount">0</span>
+              </div>
+              <div id="alertsList" class="alerts"></div>
+            </article>
+          </div>
+
+          <article class="card">
+            <div class="card-head">
+              <div>
+                <h3>Asignaciones recientes</h3>
+                <p>Últimos movimientos del proceso de pasantías</p>
+              </div>
+              <button class="btn btn-sm btn-ghost" data-page="asignaciones">Ver todas <svg class="icon"><use href="#i-arrow"></use></svg></button>
+            </div>
+            <div id="recentAssignments"></div>
+          </article>
+        </section>
+
+        <!-- ================= ESTUDIANTES ================= -->
+        <section class="page" id="page-estudiantes">
+          <div class="section-head">
+            <div>
+              <h2>Gestión de estudiantes</h2>
+              <p>Padrón, verificación de requisitos y asignación de plazas.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn" data-export="students"><svg class="icon"><use href="#i-download"></use></svg> Exportar</button>
+              <button class="btn btn-primary" data-action="new-student"><svg class="icon"><use href="#i-plus"></use></svg> Nuevo estudiante</button>
+            </div>
+          </div>
+
+          <div class="card filters">
+            <label class="search-box search-box-wide" for="studentSearch">
+              <svg class="icon"><use href="#i-search"></use></svg>
+              <input id="studentSearch" type="search" placeholder="Buscar por nombre o cédula…" autocomplete="off">
+            </label>
+            <label class="filter-field">
+              <span>Carrera</span>
+              <select id="filterCareer"><option value="">Todas las carreras</option></select>
+            </label>
+            <label class="filter-field">
+              <span>Estado</span>
+              <select id="filterStatus">
+                <option value="">Todos</option>
+                <option value="elegible">Elegibles</option>
+                <option value="asignado">Asignados</option>
+                <option value="no-elegible">No elegibles</option>
+              </select>
+            </label>
+            <label class="filter-field">
+              <span>Localidad</span>
+              <select id="filterLocality"><option value="">Todas</option></select>
+            </label>
+            <button class="chip-filter" id="filterOnlyEligible">
+              <svg class="icon"><use href="#i-shield"></use></svg> Solo elegibles
+            </button>
+            <button class="btn btn-sm btn-ghost" id="clearFilters">Limpiar</button>
+          </div>
+
+          <div class="card table-card">
+            <div class="card-head">
+              <div>
+                <h3>Registro de estudiantes</h3>
+                <p id="studentsSubtitle">Verificación automática de requisitos</p>
+              </div>
+              <span class="pill" id="studentsCount">0 estudiantes</span>
+            </div>
+            <div class="table-wrap" id="studentsTable"></div>
+          </div>
+        </section>
+
+        <!-- ================= ASIGNACIONES ================= -->
+        <section class="page" id="page-asignaciones">
+          <div class="section-head">
+            <div>
+              <h2>Asignaciones de pasantías</h2>
+              <p>Control de plazas, tutores empresariales y estado del proceso.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn" data-export="assignments"><svg class="icon"><use href="#i-download"></use></svg> Exportar</button>
+              <button class="btn btn-primary" data-action="new-assignment"><svg class="icon"><use href="#i-plus"></use></svg> Nueva asignación</button>
+            </div>
+          </div>
+
+          <div class="mini-kpi-grid" id="assignmentKpis"></div>
+
+          <div class="grid grid-2-1">
+            <article class="card table-card">
+              <div class="card-head">
+                <div>
+                  <h3>Cartera de asignaciones</h3>
+                  <p>Estudiantes vinculados a una empresa</p>
+                </div>
+                <label class="inline-select">
+                  <span>Estado</span>
+                  <select id="filterAssignment">
+                    <option value="">Todas</option>
+                    <option value="Por iniciar">Por iniciar</option>
+                    <option value="En curso">En curso</option>
+                    <option value="Culminada">Culminada</option>
+                  </select>
+                </label>
+              </div>
+              <div class="table-wrap" id="assignmentsTable"></div>
+            </article>
+
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Disponibilidad de plazas</h3>
+                  <p>Vacantes por empresa</p>
+                </div>
+                <span class="pill" id="availablePlazasPill"></span>
+              </div>
+              <div id="availabilityList" class="availability-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ================= EMPRESAS ================= -->
+        <section class="page" id="page-empresas">
+          <div class="section-head">
+            <div>
+              <h2>Empresas y plazas</h2>
+              <p>Convenios activos y oferta disponible para prácticas profesionales.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn btn-primary" data-action="new-plaza"><svg class="icon"><use href="#i-plus"></use></svg> Agregar plaza</button>
+            </div>
+          </div>
+          <div class="company-grid" id="companyGrid"></div>
+        </section>
+
+        <!-- ================= VALIDACIÓN ================= -->
+        <section class="page" id="page-validacion">
+          <div class="section-head">
+            <div>
+              <h2>Validación de requisitos</h2>
+              <p>Reglas de elegibilidad, cumplimiento y cobertura geográfica.</p>
+            </div>
+            <span class="badge badge-green"><svg class="icon"><use href="#i-shield"></use></svg> Validación activa</span>
+          </div>
+
+          <div class="grid grid-main">
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Parámetros de elegibilidad</h3>
+                  <p>Ajusta los criterios institucionales del periodo</p>
+                </div>
+              </div>
+              <form id="rulesForm" class="rules-form">
+                <div class="form-grid">
+                  <label class="field">
+                    <span>Mínimo de materias aprobadas (%)</span>
+                    <input id="rulePct" type="number" min="0" max="100" step="1" required>
+                  </label>
+                  <label class="field">
+                    <span>Promedio mínimo (0–20)</span>
+                    <input id="ruleAvg" type="number" min="0" max="20" step="0.1" required>
+                  </label>
+                  <label class="field">
+                    <span>Modalidad permitida</span>
+                    <select id="ruleModality">
+                      <option value="Presencial">Presencial</option>
+                      <option value="Semipresencial">Semipresencial</option>
+                      <option value="A distancia">A distancia</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span>Exoneración para estudiantes externos</span>
+                    <select id="ruleExo">
+                      <option value="true">Obligatoria</option>
+                      <option value="false">No exigir</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="rules-note">
+                  <svg class="icon"><use href="#i-pin"></use></svg>
+                  <span>El estudiante debe residir en un municipio del estado Zulia (contexto y localidad de la UPTZ) y cursar en modalidad presencial.</span>
+                </div>
+                <div class="form-actions">
+                  <button type="button" class="btn" id="resetRules">Restaurar valores</button>
+                  <button type="submit" class="btn btn-primary">Aplicar criterios</button>
+                </div>
+              </form>
+            </article>
+
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Cumplimiento global</h3>
+                  <p>Porcentaje de estudiantes por requisito</p>
+                </div>
+              </div>
+              <div id="complianceList" class="compliance-list"></div>
+            </article>
+          </div>
+
+          <div class="grid grid-main">
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Motivos de no elegibilidad</h3>
+                  <p>Causa principal por estudiante</p>
+                </div>
+              </div>
+              <div id="reasonsList" class="bar-list"></div>
+            </article>
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <h3>Cobertura geográfica</h3>
+                  <p>Municipios de residencia del padrón</p>
+                </div>
+                <span class="badge badge-blue"><svg class="icon"><use href="#i-pin"></use></svg> Zulia</span>
+              </div>
+              <div id="localityList" class="bar-list"></div>
+            </article>
+          </div>
+
+          <article class="card table-card">
+            <div class="card-head">
+              <div>
+                <h3>Estudiantes con requisitos pendientes</h3>
+                <p>Revisa cada caso para orientar al estudiante</p>
+              </div>
+              <span class="pill pill-alert" id="pendingCount">0</span>
+            </div>
+            <div class="table-wrap" id="pendingTable"></div>
+          </article>
+        </section>
+
+        <!-- ================= REPORTES ================= -->
+        <section class="page" id="page-reportes">
+          <div class="print-header">
+            <div class="print-brand">Universidad Politécnica Territorial del Zulia</div>
+            <strong>Reporte de gestión de prácticas y pasantías profesionales</strong>
+            <span>Coordinación de Prácticas y Pasantías · Periodo académico 2026-II</span>
+          </div>
+          <div class="section-head">
+            <div>
+              <h2>Reportes del periodo</h2>
+              <p>Documentos de control para la coordinación de pasantías.</p>
+            </div>
+            <button class="btn" data-action="print"><svg class="icon"><use href="#i-printer"></use></svg> Imprimir reporte</button>
+          </div>
+
+          <div class="report-grid">
+            <article class="card report-card">
+              <div class="report-icon"><svg class="icon"><use href="#i-users"></use></svg></div>
+              <h3>Padrón de estudiantes</h3>
+              <p>Listado completo con cumplimiento de requisitos, localidad y estado de asignación.</p>
+              <button class="btn" data-export="students"><svg class="icon"><use href="#i-download"></use></svg> Descargar CSV</button>
+            </article>
+            <article class="card report-card">
+              <div class="report-icon report-icon-blue"><svg class="icon"><use href="#i-briefcase"></use></svg></div>
+              <h3>Asignaciones y tutores</h3>
+              <p>Detalle de empresas, tutores empresariales, fecha de inicio y estado del proceso.</p>
+              <button class="btn" data-export="assignments"><svg class="icon"><use href="#i-download"></use></svg> Descargar CSV</button>
+            </article>
+            <article class="card report-card">
+              <div class="report-icon report-icon-gold"><svg class="icon"><use href="#i-printer"></use></svg></div>
+              <h3>Reporte ejecutivo</h3>
+              <p>Resumen por carrera con indicadores de elegibilidad y cobertura de plazas.</p>
+              <button class="btn" data-action="print"><svg class="icon"><use href="#i-printer"></use></svg> Imprimir</button>
+            </article>
+          </div>
+
+          <article class="card table-card">
+            <div class="card-head">
+              <div>
+                <h3>Resumen por carrera</h3>
+                <p>Indicadores consolidados del periodo 2026-II</p>
+              </div>
+              <span class="badge badge-gray" id="reportGenerated"></span>
+            </div>
+            <div class="table-wrap" id="reportTable"></div>
+          </article>
+
+          <div class="report-footer">
+            <div class="report-signature">
+              <span>Coordinación de Prácticas y Pasantías</span>
+              <strong>Universidad Politécnica Territorial del Zulia</strong>
+            </div>
+            <p>Documento generado automáticamente por el sistema de gestión de pasantías UPTZ.</p>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ================= MODAL ESTUDIANTE ================= -->
+  <div class="modal" id="modalStudent" aria-hidden="true" role="dialog" aria-labelledby="studentModalTitle">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow">Ficha académica</span>
+          <h2 id="studentModalTitle">Nuevo estudiante</h2>
+        </div>
+        <button type="button" class="icon-btn" data-close aria-label="Cerrar"><svg class="icon"><use href="#i-x"></use></svg></button>
+      </div>
+      <form id="studentForm">
+        <input type="hidden" id="f-id">
+        <div class="form-grid">
+          <label class="field span-2"><span>Nombre y apellido *</span><input id="f-nombre" required autocomplete="off" placeholder="Ej. Ana Gabriela Pérez"></label>
+          <label class="field"><span>Cédula *</span><input id="f-cedula" required autocomplete="off" placeholder="V-12.345.678"></label>
+          <label class="field"><span>Semestre</span><select id="f-semestre"></select></label>
+          <label class="field span-2"><span>Carrera *</span><select id="f-carrera" required></select></label>
+          <label class="field"><span>Materias aprobadas *</span><input id="f-aprobadas" type="number" min="0" required></label>
+          <label class="field"><span>Total de materias *</span><input id="f-totales" type="number" min="1" required></label>
+          <label class="field"><span>Promedio (0–20) *</span><input id="f-promedio" type="number" min="0" max="20" step="0.1" required></label>
+          <label class="field"><span>Localidad *</span><select id="f-localidad" required></select></label>
+          <label class="field"><span>Modalidad *</span><select id="f-modalidad"><option>Presencial</option><option>Semipresencial</option><option>A distancia</option></select></label>
+          <label class="field"><span>Universidad de origen *</span><select id="f-origen"><option value="UPTZ">UPTZ</option><option value="Otra">Otra universidad</option></select></label>
+          <label class="field"><span>Correo electrónico</span><input id="f-email" type="email" placeholder="nombre@correo.com"></label>
+          <label class="field"><span>Teléfono</span><input id="f-telefono" type="tel" placeholder="+58 412 000 0000"></label>
+        </div>
+
+        <div class="sc-group">
+          <p class="group-label">Servicio comunitario</p>
+          <div class="check-row">
+            <label class="check"><input type="checkbox" id="f-fase1"><span>Fase I aprobada</span></label>
+            <label class="check"><input type="checkbox" id="f-fase2"><span>Fase II aprobada</span></label>
+            <label class="check" id="exoField"><input type="checkbox" id="f-exoneracion"><span>Aprobación por exoneración</span></label>
+          </div>
+          <p class="hint" id="exoHint">La exoneración solo aplica a estudiantes provenientes de otra universidad.</p>
+        </div>
+
+        <div class="form-preview" id="formPreview"></div>
+
+        <div class="modal-foot">
+          <button type="button" class="btn" data-close>Cancelar</button>
+          <button type="submit" class="btn btn-primary"><svg class="icon"><use href="#i-check"></use></svg> Guardar estudiante</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL ASIGNACIÓN ================= -->
+  <div class="modal" id="modalAssign" aria-hidden="true" role="dialog" aria-labelledby="assignModalTitle">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel modal-wide">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow">Vinculación empresa · estudiante</span>
+          <h2 id="assignModalTitle">Nueva asignación</h2>
+        </div>
+        <button type="button" class="icon-btn" data-close aria-label="Cerrar"><svg class="icon"><use href="#i-x"></use></svg></button>
+      </div>
+      <form id="assignForm">
+        <input type="hidden" id="f-assign-student">
+        <input type="hidden" id="f-assign-company">
+        <div id="assignStudentSummary"></div>
+        <label class="field" id="assignStudentSelectWrap">
+          <span>Estudiante elegible</span>
+          <select id="f-assign-student-select"></select>
+        </label>
+
+        <div class="plaza-header">
+          <p class="group-label">Plazas disponibles</p>
+          <span class="hint">Solo se muestran plazas de la carrera del estudiante</span>
+        </div>
+        <div id="plazaList" class="plaza-list"></div>
+
+        <div class="form-grid">
+          <label class="field"><span>Tutor empresarial *</span><input id="f-tutor" required placeholder="Nombre del tutor"></label>
+          <label class="field"><span>Fecha de inicio *</span><input id="f-inicio" type="date" required></label>
+          <label class="field span-2"><span>Observaciones</span><textarea id="f-observaciones" rows="2" placeholder="Condiciones, horario o notas relevantes"></textarea></label>
+        </div>
+
+        <div class="modal-foot">
+          <button type="button" class="btn" data-close>Cancelar</button>
+          <button type="submit" class="btn btn-primary"><svg class="icon"><use href="#i-briefcase"></use></svg> Confirmar asignación</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL PLAZA ================= -->
+  <div class="modal" id="modalPlaza" aria-hidden="true" role="dialog" aria-labelledby="plazaModalTitle">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel modal-narrow">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow">Oferta académica</span>
+          <h2 id="plazaModalTitle">Agregar plaza</h2>
+        </div>
+        <button type="button" class="icon-btn" data-close aria-label="Cerrar"><svg class="icon"><use href="#i-x"></use></svg></button>
+      </div>
+      <form id="plazaForm">
+        <div class="form-grid">
+          <label class="field span-2"><span>Empresa *</span><select id="p-empresa" required></select></label>
+          <label class="field span-2"><span>Carrera *</span><select id="p-carrera" required></select></label>
+          <label class="field"><span>Vacantes *</span><input id="p-vacantes" type="number" min="1" value="1" required></label>
+          <label class="field"><span>Tutor empresarial</span><input id="p-tutor" placeholder="Nombre del tutor"></label>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn" data-close>Cancelar</button>
+          <button type="submit" class="btn btn-primary"><svg class="icon"><use href="#i-plus"></use></svg> Registrar plaza</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= DRAWER ESTUDIANTE ================= -->
+  <div class="drawer" id="studentDrawer" aria-hidden="true" role="dialog" aria-labelledby="drawerName">
+    <div class="drawer-backdrop" data-close></div>
+    <aside class="drawer-panel">
+      <div class="drawer-head">
+        <span class="eyebrow">Ficha integral del estudiante</span>
+        <button type="button" class="icon-btn" data-close aria-label="Cerrar"><svg class="icon"><use href="#i-x"></use></svg></button>
+      </div>
+      <div id="drawerBody"></div>
+    </aside>
+  </div>
+
+  <div class="toast-container" id="toasts" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
